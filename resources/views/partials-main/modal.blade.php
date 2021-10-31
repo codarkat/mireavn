@@ -8,11 +8,14 @@
             <div class="modal-body">
                 <div class="img-container">
                     <div class="row">
-                        <div class="col-md-8" style="border-radius: 30px" >
+                        <div class="col-md-6">
                             <img id="image_crop" src="https://avatars0.githubusercontent.com/u/3456749">
                         </div>
-                        <div class="col-md-4">
-                            <div class="preview_image rounded"></div>
+                        <div class="col-md-1"></div>
+                        <div class="col-md-4 d-flex justify-content-center">
+                            <div class="preview_image rounded-circle"></div>
+                        </div>
+                        <div class="col-md-1">
                         </div>
                         <style>
                             .preview_image {

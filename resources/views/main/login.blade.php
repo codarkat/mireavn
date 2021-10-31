@@ -1,31 +1,38 @@
-@extends('layouts.main-layout')
+@extends('layouts.main-without-navbar-layout')
 
 @section('title')
-    <title>HT Phở Đất Việt</title>
+    <title>MIREA VIỆT NAM | Đăng nhập</title>
 @endsection
 
 @section('content')
     <div class="container py-4 py-lg-5 my-4">
-        <div class="row d-flex justify-content-center">
-            <div class="col-md-6 ">
+        <div class="row d-flex justify-content-center align-items-center">
+            <div class="col-md-6">
                 <div class="card border-0 shadow">
-                    <div class="card-body">
-                        <h2 class="h4 mb-1">{{__('main.Sign-in')}}</h2>
-                        <!--
-                        <div class="py-3">
-                            <h3 class="d-inline-block align-middle fs-base fw-medium mb-2 me-2">With social account:</h3>
-                            <div class="d-inline-block align-middle"><a class="btn-social bs-google me-2 mb-2" href="#" data-bs-toggle="tooltip" title="Sign in with Google"><i class="ci-google"></i></a><a class="btn-social bs-facebook me-2 mb-2" href="#" data-bs-toggle="tooltip" title="Sign in with Facebook"><i class="ci-facebook"></i></a><a class="btn-social bs-twitter me-2 mb-2" href="#" data-bs-toggle="tooltip" title="Sign in with Twitter"><i class="ci-twitter"></i></a></div>
-                        </div>
-                        <hr>
-                        <h3 class="fs-base pt-4 pb-2">Or using form below</h3>
-                        -->
-
-                        <div class="py-3"><hr></div>
-                        @if (Session::get('fail'))
+                    <div class="card-body mt-4">
+                        <image class="center-image-logo mb-4" src="{{asset('public/main/images/logo.png')}}"></image>
+                        <h2 class="h4 mb-4 text-center">ĐĂNG NHẬP</h2>
+                        @if(count($errors)> 0)
                             <div class="alert alert-danger">
-                                {{Session::get('fail')}}
+                                Thông báo lỗi<br><br>
+                                <ul>
+                                    @foreach($errors->all() as $error)
+                                        <li>{{$error}}</li>
+                                    @endforeach
+                                </ul>
                             </div>
                         @endif
+                        @if($message = Session::get('fail'))
+                            <div class="alert alert-danger">
+                                <strong>{{$message}}</strong>
+                            </div>
+                        @endif
+                        @if($message = Session::get('success'))
+                            <div class="alert alert-success">
+                                <strong>{{$message}}</strong>
+                            </div>
+                        @endif
+                        <hr class="mb-4">
                         <form action="{{route('user.check')}}" method="post">
                             @csrf
                             <span class="text-danger small">@error('email'){{$message}}@enderror</span>
@@ -40,23 +47,17 @@
                                     <label class="password-toggle-btn" aria-label="Show/hide password">
                                         <input class="password-toggle-check" type="checkbox"><span class="password-toggle-indicator"></span>
                                     </label>
-
                                 </div>
                             </div>
-
-                            <!--
-                            <div class="d-flex flex-wrap justify-content-between align-items-center">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" checked id="remember_me">
-                                    <label class="form-check-label" for="remember_me">Remember me</label>
+                            <div class="d-flex flex-wrap justify-content-between">
+                                <div>
+                                    <a class="nav-link-inline fs-sm" href="{{route('main.index')}}"><i class="ci-home me-2 ms-n21"></i>Trang chủ</a>
                                 </div>
-                                <a class="nav-link-inline fs-sm" href="account-password-recovery.html">Forgot password?</a>
+                                <a class="nav-link-inline fs-sm" href="{{route('user.password-recovery')}}">Quên mật khẩu?</a>
                             </div>
-                            -->
-                            <hr class="mt-4">
-                            <div class="d-flex flex-wrap justify-content-between text-center align-items-center pt-4">
-                                <a class="nav-link-inline fs-sm fst-italic" href="{{route('user.register')}}"><i class="ci-idea me-2 ms-n1"></i><strong>{{__('main.Sign-up')}}</strong></a>
-                                <button class="btn btn-primary" type="submit"><i class="ci-sign-in me-2 ms-n21"></i>{{__('main.Sign-in')}}</button>
+                            <hr class="mt-3">
+                            <div class="text-center pt-4">
+                                <button class="btn btn-primary" type="submit"><i class="ci-sign-in me-2 ms-n21"></i>Đăng nhập</button>
                             </div>
                         </form>
                     </div>

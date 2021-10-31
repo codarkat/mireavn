@@ -166,6 +166,8 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 
+        Maatwebsite\Excel\ExcelServiceProvider::class,
+
 
         /*
          * Package Service Providers...
@@ -243,6 +245,8 @@ return [
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
         'Cart' => Gloudemans\Shoppingcart\Facades\Cart::class,
         'Image' => 'Intervention\Image\Facades\Image',
+
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ],
 
 ];

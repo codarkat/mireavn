@@ -1,25 +1,23 @@
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     @yield('title')
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('public/admin/assets/css/bootstrap.css')}}">
 
-    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('public/admin/images/favicon.png')}}">
+    <link rel="stylesheet" href="{{asset('public/admin/assets/vendors/toastify/toastify.css')}}">
+    <link rel="stylesheet" href="{{asset('public/admin/assets/vendors/sweetalert2/sweetalert2.min.css')}}">
 
-	<link href="{{asset('public/admin/vendor/lightgallery/css/lightgallery.min.css')}}" rel="stylesheet">
-
-    <link href="{{asset('public/admin/vendor/jqvmap/css/jqvmap.min.css')}}" rel="stylesheet">
-	<link href="{{asset('public/admin/vendor/chartist/css/chartist.min.css')}}" rel="stylesheet">
-	<link href="{{asset('public/admin/vendor/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css')}}" rel="stylesheet">
-
-    <!-- Datatable -->
-    <link href="{{asset('public/admin/vendor/datatables/css/jquery.dataTables.min.css')}}" rel="stylesheet">
-
-
-
-    <link href="{{asset('public/admin/vendor/bootstrap-select/dist/css/bootstrap-select.min.css')}}" rel="stylesheet">
-    <link href="{{asset('public/admin/css/style.css')}}" rel="stylesheet">
-	<link href="{{asset('public/admin/css/fix.css')}}" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&amp;family=Roboto:wght@100;300;400;500;700;900&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('public/admin/assets/vendors/perfect-scrollbar/perfect-scrollbar.css')}}">
+    <link rel="stylesheet" href="{{asset('public/admin/assets/vendors/bootstrap-icons/bootstrap-icons.css')}}">
+    <link rel="stylesheet" href="{{asset('public/admin/assets/vendors/iconly/bold.css')}}">
+    <link rel="stylesheet" href="{{asset('public/admin/assets/css/app.css')}}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{asset('public/main/images/logo.ico')}}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{asset('public/main/images/logo.ico')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('public/main/images/logo.ico')}}">
+    <link rel="mask-icon" color="#fe6a6a" href="{{asset('public/main/images/logo.ico')}}">
 </head>

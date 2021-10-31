@@ -15,109 +15,104 @@ use App\Http\Controllers\PaymentController;
 |
 */
 
-//Set locale
-Route::get('set-locale/{locale}',[
-    'as' => 'setting.locale',
-    'uses' => 'LocalizationController@index'
-]);
-
-
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
-
-
 
 Route::prefix('admin')->group(function (){
 
-    Route::middleware(['auth:admin', 'PreventBrowserBackHistory'])->group(function (){
-
+    Route::middleware(['admin:admin', 'PreventBrowserBackHistory'])->group(function (){
         Route::get('', [
             'as' => 'admin.dashboard',
             'uses' => 'AdminController@dashboard'
         ]);
 
-        Route::prefix('category')->group(function () {
+        Route::get('/list-users', [
+            'as' => 'admin.list-users',
+            'uses' => 'AdminController@listUsers'
+        ]);
 
-            Route::get('/add-category', [
-                'as' => 'category.add-category',
-                'uses' => 'CategoryController@addCategory'
-            ]);
-            Route::get('/all-categories', [
-                'as' => 'category.all-categories',
-                'uses' => 'CategoryController@allCategories'
-            ]);
+        Route::get('/results', [
+            'as' => 'admin.results',
+            'uses' => 'AdminController@results'
+        ]);
 
-            Route::post('/insert', [
-                'as' => 'category.insert',
-                'uses' => 'CategoryController@insert'
-            ]);
+        Route::get('/settings-page-vote', [
+            'as' => 'admin.settings-page-vote',
+            'uses' => 'AdminController@settingsPageVote'
+        ]);
 
-            Route::post('/delete', [
-                'as' => 'category.delete',
-                'uses' => 'CategoryController@delete'
-            ]);
+        Route::get('/get-all-users', [
+            'as' => 'admin.get-all-users',
+            'uses' => 'AdminController@getAllUsers'
+        ]);
 
-            Route::post('/update', [
-                'as' => 'category.update',
-                'uses' => 'CategoryController@update'
-            ]);
+        Route::get('/get-all-candidates', [
+            'as' => 'admin.get-all-candidates',
+            'uses' => 'AdminController@getAllCandidates'
+        ]);
 
-            Route::get('/admin-get-category-by-ID/{id}', [
-                'as' => 'category.adminGetCategoryByID',
-                'uses' => 'CategoryController@getCategoryByID'
-            ]);
+        Route::get('/get-all-votes', [
+            'as' => 'admin.get-all-votes',
+            'uses' => 'AdminController@getAllVotes'
+        ]);
 
-            Route::get('/getCategories', [
-                'as' => 'category.getCategories',
-                'uses' => 'CategoryController@getCategories'
-            ]);
+        Route::get('/show-result', [
+            'as' => 'admin.show-result',
+            'uses' => 'AdminController@showResult'
+        ]);
 
-        });
 
-        Route::prefix('product')->group(function () {
-            Route::get('/add-product', [
-                'as' => 'product.add-product',
-                'uses' => 'ProductController@addProduct'
-            ]);
-            Route::get('/all-products', [
-                'as' => 'product.all-products',
-                'uses' => 'ProductController@allProducts'
-            ]);
+        //Function
+        Route::post('/reset-candidates', [
+            'as' => 'admin.reset-candidates',
+            'uses' => 'AdminController@resetCandidates'
+        ]);
 
-            Route::post('/insert', [
-                'as' => 'product.insert',
-                'uses' => 'ProductController@insert'
-            ]);
+        Route::post('/set-status-all-users', [
+            'as' => 'admin.set-status-all-users',
+            'uses' => 'AdminController@setStatusAllUsers'
+        ]);
 
-            Route::post('/update', [
-                'as' => 'product.update',
-                'uses' => 'ProductController@update'
-            ]);
+        Route::post('/set-status-user', [
+            'as' => 'admin.set-status-user',
+            'uses' => 'AdminController@setStatusUser'
+        ]);
 
-            Route::post('/delete', [
-                'as' => 'product.delete',
-                'uses' => 'ProductController@delete'
-            ]);
+        Route::post('/set-status-page-vote', [
+            'as' => 'admin.set-status-page-vote',
+            'uses' => 'AdminController@setStatusPageVote'
+        ]);
 
-            Route::get('/getProducts', [
-                'as' => 'product.getProducts',
-                'uses' => 'ProductController@getProducts'
-            ]);
+        Route::post('/set-qty', [
+            'as' => 'admin.set-qty',
+            'uses' => 'AdminController@setQty'
+        ]);
 
-            Route::get('/AdminGetProductByID/{id}', [
-                'as' => 'product.adminGetProductByID',
-                'uses' => 'ProductController@getProductByID'
-            ]);
-        });
+        Route::post('/add-candidate', [
+            'as' => 'admin.add-candidate',
+            'uses' => 'AdminController@addCandidate'
+        ]);
+
+        Route::post('/remove-candidate', [
+            'as' => 'admin.remove-candidate',
+            'uses' => 'AdminController@removeCandidate'
+        ]);
+
+        Route::post('/import-user-create', [
+            'as' => 'admin.import-user-create',
+            'uses' => 'AdminController@importUserCreate'
+        ]);
+
+        Route::post('/logout', [
+            'as' => 'admin.logout',
+            'uses' => 'AdminController@logout'
+        ]);
+
     });
 
     Route::middleware(['guest:admin', 'PreventBrowserBackHistory'])->group(function (){
 
+
         Route::get('/login', [
-            'as' => 'login',
+            'as' => 'admin.login',
             'uses' => 'AdminController@login'
         ]);
 
@@ -126,264 +121,90 @@ Route::prefix('admin')->group(function (){
             'uses' => 'AdminController@check'
         ]);
 
-        Route::prefix('category')->group(function () {
-
-            Route::get('/get-category-by-ID/{id}', [
-                'as' => 'category.getCategoryByID',
-                'uses' => 'CategoryController@getCategoryByID'
-            ]);
-
-        });
-
-        Route::prefix('product')->group(function () {
-
-            Route::get('/getProductByID/{id}', [
-                'as' => 'product.getProductByID',
-                'uses' => 'ProductController@getProductByID'
-            ]);
-        });
-
     });
 
 });
 
-// ====== - START - Category ====== //
-//Route::prefix('admin/category')->group(function () {
-////    Route::get('/add-category', [
-////        'as' => 'category.add-category',
-////        'uses' => 'CategoryController@addCategory'
-////    ]);
-////    Route::get('/all-categories', [
-////        'as' => 'category.all-categories',
-////        'uses' => 'CategoryController@allCategories'
-////    ]);
-////
-////    Route::post('/insert', [
-////        'as' => 'category.insert',
-////        'uses' => 'CategoryController@insert'
-////    ]);
-////
-////    Route::post('/delete', [
-////        'as' => 'category.delete',
-////        'uses' => 'CategoryController@delete'
-////    ]);
-////
-////    Route::post('/update', [
-////        'as' => 'category.update',
-////        'uses' => 'CategoryController@update'
-////    ]);
-////
-////    Route::get('/get-category-by-ID/{id}', [
-////        'as' => 'category.getCategoryByID',
-////        'uses' => 'CategoryController@getCategoryByID'
-////    ]);
-//
-//    Route::get('/getCategories', [
-//        'as' => 'category.getCategories',
-//        'uses' => 'CategoryController@getCategories'
-//    ]);
-//
-//});Route::prefix('admin/category')->group(function () {
-////    Route::get('/add-category', [
-////        'as' => 'category.add-category',
-////        'uses' => 'CategoryController@addCategory'
-////    ]);
-////    Route::get('/all-categories', [
-////        'as' => 'category.all-categories',
-////        'uses' => 'CategoryController@allCategories'
-////    ]);
-////
-////    Route::post('/insert', [
-////        'as' => 'category.insert',
-////        'uses' => 'CategoryController@insert'
-////    ]);
-////
-////    Route::post('/delete', [
-////        'as' => 'category.delete',
-////        'uses' => 'CategoryController@delete'
-////    ]);
-////
-////    Route::post('/update', [
-////        'as' => 'category.update',
-////        'uses' => 'CategoryController@update'
-////    ]);
-////
-////    Route::get('/get-category-by-ID/{id}', [
-////        'as' => 'category.getCategoryByID',
-////        'uses' => 'CategoryController@getCategoryByID'
-////    ]);
-//
-//    Route::get('/getCategories', [
-//        'as' => 'category.getCategories',
-//        'uses' => 'CategoryController@getCategories'
-//    ]);
-//
-//});
-// ====== - END - Category ====== //
-//
-//
-//// ====== - START - Product ====== //
-//Route::prefix('admin/product')->group(function () {
-//    Route::get('/add-product', [
-//        'as' => 'product.add-product',
-//        'uses' => 'ProductController@addProduct'
-//    ]);
-//    Route::get('/all-products', [
-//        'as' => 'product.all-products',
-//        'uses' => 'ProductController@allProducts'
-//    ]);
-//
-//    Route::post('/insert', [
-//        'as' => 'product.insert',
-//        'uses' => 'ProductController@insert'
-//    ]);
-//
-//    Route::post('/update', [
-//        'as' => 'product.update',
-//        'uses' => 'ProductController@update'
-//    ]);
-//
-//    Route::post('/delete', [
-//        'as' => 'product.delete',
-//        'uses' => 'ProductController@delete'
-//    ]);
-//
-//    Route::get('/getProducts', [
-//        'as' => 'product.getProducts',
-//        'uses' => 'ProductController@getProducts'
-//    ]);
-//
-//    Route::get('/getProductByID/{id}', [
-//        'as' => 'product.getProductByID',
-//        'uses' => 'ProductController@getProductByID'
-//    ]);
-//});
-//// ====== - END - Product ====== //
 
 
-Route::get('/', [
-    'as' => 'main.home',
-    'uses' => 'HomeController@home'
-]);
+Route::name('main.')->group(function (){
+    Route::get('/', function () {
+        return view('main.index');
+    });
 
-Route::get('/store', [
-    'as' => 'main.store',
-    'uses' => 'HomeController@store'
-]);
-
-Route::get('/contacts', [
-    'as' => 'main.contacts',
-    'uses' => 'HomeController@contacts'
-]);
-
-Route::get('/cart-details', [
-    'as' => 'main.cartDetails',
-    'uses' => 'HomeController@cartDetails'
-]);
-
-Route::match(['GET', 'POST'], '/payment/callback', [
-    'as' => 'payment.callback',
-    'uses' => 'PaymentController@callback'
-]);
-
-Route::post('/getSearch', [
-    'as' => 'main.getSearch',
-    'uses' => 'HomeController@getSearch'
-]);
-
-
-// ====== - START - Cart ====== //
-Route::prefix('cart')->name('cart.')->group(function () {
-    Route::post('/add-to-cart', [
-        'as' => 'addToCart',
-        'uses' => 'CartController@addToCart'
+    Route::get('/', [
+        'as' => 'index',
+        'uses' => 'HomeController@index'
     ]);
 
-    Route::post('/destroy-cart', [
-        'as' => 'destroyCart',
-        'uses' => 'CartController@destroyCart'
+    Route::get('/club/ikbo', [
+        'as' => 'club-ikbo',
+        'uses' => 'HomeController@clubIKBO'
     ]);
 
-    Route::post('/remove-cart-item', [
-        'as' => 'removeCartItem',
-        'uses' => 'CartController@removeCartItem'
+    Route::get('/club/mirea-fc', [
+        'as' => 'club-mirea-fc',
+        'uses' => 'HomeController@clubMireaFC'
     ]);
-
-    Route::post('/update-quantity', [
-        'as' => 'updateQuantity',
-        'uses' => 'CartController@updateQuantity'
-    ]);
-
-    Route::get('/reload-cart', [
-        'as' => 'reloadCart',
-        'uses' => 'CartController@reloadCart'
-    ]);
-
-
-    Route::post('/add-to-wishlist', [
-        'as' => 'addToWishlist',
-        'uses' => 'CartController@addToWishlist'
-    ]);
-
-    Route::post('/remove-from-wishlist', [
-        'as' => 'removeFromWishlist',
-        'uses' => 'CartController@removeFromWishlist'
-    ]);
-
-    Route::post('/destroy-wishlist', [
-        'as' => 'destroyWishlist',
-        'uses' => 'CartController@destroyWishlist'
-    ]);
-
-    Route::get('/reload-wishlist', [
-        'as' => 'reloadWishlist',
-        'uses' => 'CartController@reloadWishlist'
-    ]);
-
-
-
 });
-// ====== - END - Product ====== //
+
+////Test real-time
+//Route::get('test', function () {
+//    event(new App\Events\StatusLiked('Someone'));
+//    return "Event has been sent!";
+//});
+//
+//Route::get('/welcome', function () {
+//    return view('welcome');
+//});
+
 
 Auth::routes();
 
 Route::prefix('user')->name('user.')->group(function (){
     Route::middleware(['guest:web', 'PreventBrowserBackHistory'])->group(function (){
+
+        //UI
+
         Route::get('/login', [
             'as' => 'login',
             'uses' => 'User\UserController@login'
         ]);
-        Route::get('/register', [
-            'as' => 'register',
-            'uses' => 'User\UserController@register'
+
+        Route::get('/password-recovery', [
+            'as' => 'password-recovery',
+            'uses' => 'User\UserController@passwordRecovery'
         ]);
 
-        Route::post('/create', [
-            'as' => 'create',
-            'uses' => 'User\UserController@create'
-        ]);
         Route::post('/check', [
             'as' => 'check',
             'uses' => 'User\UserController@check'
         ]);
 
-
     });
 
     Route::middleware(['auth:web', 'PreventBrowserBackHistory'])->group(function (){
-        Route::get('/profile', [
-            'as' => 'profileInfo',
-            'uses' => 'User\UserController@profileInfo'
+        //UI
+        Route::get('/page-vote', [
+            'as' => 'page-vote',
+            'uses' => 'User\UserController@pageVote'
         ]);
 
-        Route::get('/wishlist', [
-            'as' => 'wishlist',
-            'uses' => 'User\UserController@wishlist'
+        Route::get('/friends', [
+            'as' => 'friends',
+            'uses' => 'User\UserController@friends'
         ]);
 
-        Route::get('/orders', [
-            'as' => 'orders',
-            'uses' => 'User\UserController@orders'
+        Route::get('/user-settings', [
+            'as' => 'user-settings',
+            'uses' => 'User\UserController@userSettings'
+        ]);
+
+
+        //Function
+        Route::post('/create-vote', [
+            'as' => 'create-vote',
+            'uses' => 'User\UserController@createVote'
         ]);
 
         Route::post('/logout', [
@@ -403,32 +224,6 @@ Route::prefix('user')->name('user.')->group(function (){
             'uses' => 'User\UserController@changePassword'
         ]);
 
-        Route::post('/add-order-to-review', [
-            'as' => 'addOrderToReview',
-            'uses' => 'OrderController@addOrderToReview'
-        ]);
-
-        Route::get('/checkout-review', [
-            'as' => 'checkoutReview',
-            'uses' => 'HomeController@checkoutReview'
-        ]);
-
-        Route::get('/checkout-complete/{orderTracking}', [
-            'as' => 'checkoutComplete',
-            'uses' => 'HomeController@checkoutComplete'
-        ]);
-
-
-
-        Route::post('/payment/create', [
-            'as' => 'payment.create',
-            'uses' => 'PaymentController@create'
-        ]);
-
-        Route::post('/order/create', [
-            'as' => 'order.create',
-            'uses' => 'OrderController@createOrder'
-        ]);
     });
 });
 

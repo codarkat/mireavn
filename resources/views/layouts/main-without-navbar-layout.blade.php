@@ -5,16 +5,11 @@
     <!-- Body-->
     <body style="font-family: 'Quicksand', sans-serif !important;">
 
-<main class="page-wrapper">
+<main class="page-wrapper d-flex align-items-center">
 
-    @include('partials-main.navbar')
     @yield('content')
 
 </main>
-
-    @include('partials-main.footer')
-    @include('partials-main.back-to-top')
     @include('partials-main.script')
-
 </body>
 </html>
