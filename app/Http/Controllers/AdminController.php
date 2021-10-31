@@ -258,6 +258,7 @@ class AdminController extends Controller
             'select_file' => 'required|mimes:xls,xlsx'
         ]);
 
+        User::truncate();
         Excel::import(new UsersImport, $request->file('select_file'));
         return back()->with('success', 'Excel data imported successfully!');
     }
