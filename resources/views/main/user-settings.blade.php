@@ -36,7 +36,8 @@
                         <!-- Profile-->
                         <div class="tab-pane fade show active" id="profile" role="tabpanel">
                             <div class="bg-primary rounded-3 p-4 mb-4">
-                                <div class="d-flex align-items-center "><img class="rounded-circle account-avatar" src="{{$urlPhoto}}/{{$dataUser->image}}" width="90" alt="Avatar">
+                                <div class="d-flex align-items-center ">
+                                    <img class="rounded-circle account-avatar" src="{{$urlPhoto}}/{{$dataUser->image}}" width="90" alt="Avatar">
                                     <div class="ps-3">
                                         <button class="btn btn-light btn-shadow btn-sm mb-2" type="button" id="button-change-image"><i class="ci-loading me-2"></i>{{__('main.Change-avatar')}}</button>
                                         <input type="file" id="account-image" style="display: none" class="image_upload">
