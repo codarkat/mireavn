@@ -32,7 +32,7 @@ class UsersImport implements ToModel
 
         Mail::to($email)->send(new \App\Mail\NotifyNewUser($details));
 
-        $image = $this->makeAvatar(strtoupper($name[0]));
+        //$image = $this->makeAvatar(strtoupper($name[0]));
 
         return new User([
             'name'     => $name,
