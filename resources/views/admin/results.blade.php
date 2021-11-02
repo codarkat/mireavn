@@ -9,10 +9,35 @@
         <section class="section" id="chart-results" style="display: none">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Bảng kết quả</h4>
+                    <h2 class="card-title text-center mt-2">BẢNG KẾT QUẢ</h2>
+                    <div class="mt-3 mb-3">
+                        <h6><span class="badge bg-primary total-users-online">{{$total_users_online}}</span> Số lượng thành viên tham gia</h6>
+                        <h6><span class="badge bg-primary total-users-online">{{$total_users_online}}</span> Số lượng phiếu phát ra </h6>
+                        <h6><span class="badge bg-primary total-users-vote">{{$total_users_vote}}</span> Số lượng phiếu thu vào </h6>
+                        <h6><span class="badge bg-primary total-users-vote-empty">{{$total_users_online-$total_users_vote}}</span> Số lượng phiếu phiếu trống </h6>
+                    </div>
                 </div>
                 <div class="card-body">
+                    <div class="mb-5">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                @foreach($arrayDataCandidates as $candidate)
+                                    <th>{{$candidate}}</th>
+                                @endforeach
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                @foreach($arrayDataVotesPercent as $data)
+                                    <td>{{$data}}%</td>
+                                @endforeach
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
                     <canvas id="bar"></canvas>
+
                 </div>
             </div>
         </section>
@@ -40,12 +65,8 @@
                         <tr>
                             <th>#</th>
                             <th>ID mã hóa</th>
-                            @foreach($dataCandidates as $candidate)
-                                @foreach($dataUsers as $user)
-                                    @if($candidate->user_id == $user->id)
-                                        <th>{{$user->name}}</th>
-                                    @endif
-                                @endforeach
+                            @foreach($arrayDataCandidates as $candidate)
+                                <th>{{$candidate}}</th>
                             @endforeach
                         </tr>
                         </thead>

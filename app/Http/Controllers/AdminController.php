@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\StatusEnum;
+use App\Events\ActivePageVote;
 use App\Events\UpdateChange;
 use App\Imports\UsersImport;
 use App\Models\Candidate;
@@ -55,10 +56,35 @@ class AdminController extends Controller
     }
 
     public function results(){
-        $dataCandidates = Candidate::all();
+        $arrayDataCandidates = [];
+        $arrayDataVotesPercent = [];
+
+        $total_users_online = User::where('status', StatusEnum::ACTIVE)->get()->count();
+        $total_users_vote = ListVote::all()->count();
+
         $dataUsers = User::all();
         $dataSettings = Setting::find(1);
+        $dataCandidates = Candidate::all();
+        $votes = ListVote::all();
+
+        foreach ($dataCandidates as $candidate){
+            $user = User::where('id', $candidate->user_id)->first();
+            array_push($arrayDataCandidates, $user->name);
+        }
+        for ($i = 0; $i < $dataCandidates->count(); $i++){
+            $total_result = 0;
+            foreach ($votes as $vote) {
+                $result_row = json_decode($vote->result);
+                $total_result += (int)$result_row[$i];
+            }
+            array_push($arrayDataVotesPercent, $total_result/$total_users_online*100);
+        }
+
         return view('admin.results', [
+            'arrayDataCandidates'=> $arrayDataCandidates,
+            'arrayDataVotesPercent' => $arrayDataVotesPercent,
+            'total_users_online' => $total_users_online,
+            'total_users_vote' => $total_users_vote,
             'dataCandidates' => $dataCandidates,
             'dataUsers' => $dataUsers,
             'dataSettings' => $dataSettings,
@@ -201,7 +227,7 @@ class AdminController extends Controller
         foreach ($users as $user){
             $user->status = $status;
             $user->save();
-            event(new UpdateChange($status, $user->id));
+            event(new UpdateChange($status, $user->id, 0));
         }
         return back()->with('success', 'Status changed successfully!');
     }
@@ -212,7 +238,7 @@ class AdminController extends Controller
         $user = User::find($request->input('id'));
         $user->status = $status;
         $user->save();
-        event(new UpdateChange($status, $user->id));
+        event(new UpdateChange($status, $user->id, 0));
         return back()->with('success', 'Status changed successfully!');
     }
 
@@ -222,13 +248,25 @@ class AdminController extends Controller
         $setting = Setting::find(1);
         $setting->status = $status;
         $setting->save();
+        event(new UpdateChange($status, Auth::user()->id, 1));
         return back();
     }
+
+    //Hàm xử lý set giá trị trạng thái của trang bầu cử INACTIVE
+    public function setStatusPageVoteINACTIVE(){
+        $status = StatusEnum::INACTIVE;
+        $setting = Setting::find(1);
+        $setting->status = $status;
+        $setting->save();
+        event(new UpdateChange($status, Auth::user()->id, 1));
+    }
+
 
     //Hàm xử lý reset bảng những ứng viên
     public function resetCandidates(){
         Candidate::truncate();
         $this->resetResultVotes();
+        $this->setStatusPageVoteINACTIVE();
         return back()->with('success', 'Table candidates has been reset successfully!');
     }
 
@@ -267,6 +305,11 @@ class AdminController extends Controller
     public function showResult(){
         $arrayDataCandidates = [];
         $arrayDataVotes = [];
+        $arrayDataVotesPercent = [];
+
+        $total_users_online = User::where('status', StatusEnum::ACTIVE)->get()->count();
+        $total_users_vote = ListVote::all()->count();
+
         $dataSettings = Setting::find(1);
         $candidates = Candidate::all();
         $votes = ListVote::all();
@@ -282,11 +325,15 @@ class AdminController extends Controller
                 $total_result += (int)$result_row[$i];
             }
             array_push($arrayDataVotes, $total_result);
+            array_push($arrayDataVotesPercent, $total_result/$total_users_online*100);
         }
 
         return response()->json(['code'=> 1,
             'arrayDataCandidates'=> $arrayDataCandidates,
-            'arrayDataVotes' => $arrayDataVotes
+            'arrayDataVotes' => $arrayDataVotes,
+            'arrayDataVotesPercent' => $arrayDataVotesPercent,
+            'total_users_online' => $total_users_online,
+            'total_users_vote' => $total_users_vote
         ]);
     }
 }

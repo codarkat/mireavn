@@ -25,16 +25,18 @@
 
     var channel = pusher.subscribe('mireavn');
     channel.bind('App\\Events\\UpdateChange', function(data) {
-        console.log(data);
-        console.log(data.status);
-        console.log(data.user_id);
-        console.log($('#user-status-'+data.user_id));
-        var status = '';
-        if(data.status == '{{\App\Enums\StatusEnum::ACTIVE}}'){
-            status += `<span class="badge bg-success"><i class="ci-check me-2"></i>Online</span>`;
+        if(data.active == 0){
+            console.log(data.active);
+            var status = '';
+            if(data.status == '{{\App\Enums\StatusEnum::ACTIVE}}'){
+                status += `<span class="badge bg-success"><i class="ci-check me-2"></i>Online</span>`;
+            } else {
+                status += `<span class="badge bg-danger"><i class="ci-delete-location me-2"></i>Offline</span>`;
+            }
+            $('#user-status-'+data.user_id).html(status);
         } else {
-            status += `<span class="badge bg-danger"><i class="ci-delete-location me-2"></i>Offline</span>`;
+            console.log(data.active);
+            window.location.reload(true);
         }
-        $('#user-status-'+data.user_id).html(status);
     });
 </script>

@@ -16,15 +16,17 @@ class UpdateChange implements ShouldBroadcast
 
     public $status;
     public $user_id;
+    public $active;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($status, $user_id)
+    public function __construct($status, $user_id, $active)
     {
         $this->status = $status;
         $this->user_id  = $user_id;
+        $this->active = $active;
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Enums\StatusEnum;
+use App\Events\UpdateChange;
 use App\Http\Controllers\Controller;
 use App\Imports\UsersImport;
 use App\Models\Candidate;
@@ -171,6 +172,7 @@ class UserController extends Controller
                 $vote->user_id = $id;
                 $vote->result = $dataArray;
                 $vote->save();
+                event(new UpdateChange('INACTIVE', $id, 1));
                 return response()->json(['code'=> 1, 'success'=> 'Bầu cử thành công!']);
             }
 
