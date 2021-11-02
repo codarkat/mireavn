@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Enums\StatusEnum;
 use App\Events\ActivePageVote;
 use App\Events\UpdateChange;
+use App\Events\UpdatePageListUsers;
 use App\Imports\UsersImport;
 use App\Models\Candidate;
 use App\Models\Category;
@@ -52,7 +53,12 @@ class AdminController extends Controller
     }
 
     public function listUsers(){
-        return view('admin.list-users');
+        $total_users_online = User::where('status', StatusEnum::ACTIVE)->get()->count();
+        $total_users_offline = User::where('status', StatusEnum::INACTIVE)->get()->count();
+        return view('admin.list-users', [
+            'total_users_online' => $total_users_online,
+            'total_users_offline' => $total_users_offline,
+        ]);
     }
 
     public function results(){
@@ -77,7 +83,7 @@ class AdminController extends Controller
                 $result_row = json_decode($vote->result);
                 $total_result += (int)$result_row[$i];
             }
-            array_push($arrayDataVotesPercent, $total_result/$total_users_online*100);
+            array_push($arrayDataVotesPercent, round($total_result/$total_users_online*100, 2));
         }
 
         return view('admin.results', [
@@ -222,6 +228,8 @@ class AdminController extends Controller
 
     //Hàm xử lý set giá trị trạng thái của tất cả các tài khoản
     public function setStatusAllUsers(Request $request){
+
+
         $status = $request->input('status');
         $users = User::all();
         foreach ($users as $user){
@@ -229,6 +237,9 @@ class AdminController extends Controller
             $user->save();
             event(new UpdateChange($status, $user->id, 0));
         }
+        $total_users_online = User::where('status', StatusEnum::ACTIVE)->get()->count();
+        $total_users_offline = User::where('status', StatusEnum::INACTIVE)->get()->count();
+        event(new UpdatePageListUsers( $total_users_online, $total_users_offline));
         return back()->with('success', 'Status changed successfully!');
     }
 
@@ -239,6 +250,9 @@ class AdminController extends Controller
         $user->status = $status;
         $user->save();
         event(new UpdateChange($status, $user->id, 0));
+        $total_users_online = User::where('status', StatusEnum::ACTIVE)->get()->count();
+        $total_users_offline = User::where('status', StatusEnum::INACTIVE)->get()->count();
+        event(new UpdatePageListUsers( $total_users_online, $total_users_offline));
         return back()->with('success', 'Status changed successfully!');
     }
 
@@ -305,10 +319,6 @@ class AdminController extends Controller
     public function showResult(){
         $arrayDataCandidates = [];
         $arrayDataVotes = [];
-        $arrayDataVotesPercent = [];
-
-        $total_users_online = User::where('status', StatusEnum::ACTIVE)->get()->count();
-        $total_users_vote = ListVote::all()->count();
 
         $dataSettings = Setting::find(1);
         $candidates = Candidate::all();
@@ -325,15 +335,11 @@ class AdminController extends Controller
                 $total_result += (int)$result_row[$i];
             }
             array_push($arrayDataVotes, $total_result);
-            array_push($arrayDataVotesPercent, $total_result/$total_users_online*100);
         }
 
         return response()->json(['code'=> 1,
             'arrayDataCandidates'=> $arrayDataCandidates,
-            'arrayDataVotes' => $arrayDataVotes,
-            'arrayDataVotesPercent' => $arrayDataVotesPercent,
-            'total_users_online' => $total_users_online,
-            'total_users_vote' => $total_users_vote
+            'arrayDataVotes' => $arrayDataVotes
         ]);
     }
 }

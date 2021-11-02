@@ -60,6 +60,12 @@
                     <button class="btn btn-success" id="show_results">Hiển thị kết quả</button>
                 </div>
                 <div class="card-body">
+                    <div class="mb-3">
+                        <h6><span class="badge bg-primary total-users-online">{{$total_users_online}}</span> Số lượng thành viên tham gia</h6>
+                        <h6><span class="badge bg-primary total-users-online">{{$total_users_online}}</span> Số lượng phiếu phát ra </h6>
+                        <h6><span class="badge bg-primary total-users-vote">{{$total_users_vote}}</span> Số lượng phiếu thu vào </h6>
+                        <h6><span class="badge bg-primary total-users-vote-empty">{{$total_users_online-$total_users_vote}}</span> Số lượng phiếu phiếu trống </h6>
+                    </div>
                     <table class="table table-striped" id="votes-datatable">
                         <thead>
                         <tr>

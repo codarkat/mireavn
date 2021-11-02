@@ -25,6 +25,10 @@
         <section class="section">
             <div class="card">
                 <div class="card-body">
+                    <div class="mb-4">
+                        <h6><span class="badge bg-primary total-users-online">{{$total_users_online}}</span> Số lượng thành viên tham gia</h6>
+                        <h6><span class="badge bg-primary total-users-offline">{{$total_users_offline}}</span> Số lượng thành viên vắng </h6>
+                    </div>
                     <table class="table table-striped" id="users-datatable">
                         <thead>
                         <tr>
@@ -48,7 +52,19 @@
 @endsection
 
 @section('script')
+    <script src="https://js.pusher.com/7.0/pusher-with-encryption.min.js"></script>
     <script>
+        var pusher = new Pusher('{{env("MIX_PUSHER_APP_KEY")}}', {
+            cluster: '{{env("PUSHER_APP_CLUSTER")}}',
+            encrypted: true
+        });
+
+        var channel = pusher.subscribe('list-users');
+        channel.bind('App\\Events\\UpdatePageListUsers', function(data) {
+            console.log(data);
+                $('.total-users-online').html(data.total_users_online);
+                $('.total-users-offline').html(data.total_users_offline);
+        });
 
         function changeStatusAccount(e){
             var id = e.getAttribute('user-id');
