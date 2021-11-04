@@ -12,6 +12,11 @@
                     <div class="card-body mt-4">
                         <image class="center-image-logo mb-4" src="{{asset('public/main/images/logo.png')}}"></image>
                         <h2 class="h4 mb-4 text-center">ĐĂNG NHẬP</h2>
+                        @if (Session::has('message'))
+                            <div class="alert alert-success" role="alert">
+                                {{ Session::get('message') }}
+                            </div>
+                        @endif
                         @if(count($errors)> 0)
                             <div class="alert alert-danger">
                                 Thông báo lỗi<br><br>

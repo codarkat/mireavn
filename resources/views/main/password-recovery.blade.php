@@ -8,21 +8,34 @@
     <div class="container py-4 py-lg-5 my-4">
         <div class="row justify-content-center">
             <div class="col-lg-8 col-md-10">
-                <h2 class="h3 mb-4">Forgot your password?</h2>
-                <p class="fs-md">Change your password in three easy steps. This helps to keep your new password secure.</p>
+                <h2 class="h3 mb-4">Quên mật khẩu?</h2>
+                <p class="fs-md">Thay đổi mật khẩu của bạn trong ba bước đưới đây.</p>
                 <ol class="list-unstyled fs-md">
-                    <li><span class="text-primary me-2">1.</span>Fill in your email address below.</li>
-                    <li><span class="text-primary me-2">2.</span>We'll email you a temporary code.</li>
-                    <li><span class="text-primary me-2">3.</span>Use the code to change your password on our secure website.</li>
+                    <li><span class="text-primary me-2">1.</span>Điền địa chỉ email của bạn vào ô dưới đây.</li>
+                    <li><span class="text-primary me-2">2.</span>Chúng tôi sẽ gửi một liên kết thay đổi mật khẩu đến địa chỉ email của bạn.</li>
+                    <li><span class="text-primary me-2">3.</span>Truy cập liên kết và làm theo hướng dẫn để nhận mật khẩu mới.</li>
                 </ol>
+                @if (Session::has('message'))
+                    <div class="alert alert-success" role="alert">
+                        {{ Session::get('message') }}
+                    </div>
+                @endif
                 <div class="card py-2 mt-4">
-                    <form class="card-body needs-validation" novalidate>
+
+                    <form class="card-body needs-validation" action="{{ route('forget.password.post') }}" method="POST">
+                        @csrf
+
                         <div class="mb-3">
-                            <label class="form-label" for="recover-email">Enter your email address</label>
-                            <input class="form-control" type="email" id="recover-email" required>
-                            <div class="invalid-feedback">Please provide valid email address.</div>
+                            <label class="form-label" for="email_address">Nhập địa chỉ email của bạn</label>
+                            <input type="text" id="email_address" class="form-control" name="email" required autofocus>
+                            @if ($errors->has('email'))
+                                <span class="text-danger">{{ $errors->first('email') }}</span>
+                            @endif
+                            <div class="invalid-feedback">Vui lòng nhập địa chỉ email hợp lệ.</div>
                         </div>
-                        <button class="btn btn-primary" type="submit">Get new password</button>
+
+
+                        <button class="btn btn-primary" type="submit">Nhận mật khẩu mới</button>
                     </form>
                 </div>
             </div>
