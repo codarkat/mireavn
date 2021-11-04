@@ -96,13 +96,11 @@
             </div>
         </div>
     </div>
-    @include('partials-main.modal')
 
 @endsection
 
 @section('script')
     <script>
-
         $('#button-change-image').click(function (){
             $('#account-image').click();
         });
