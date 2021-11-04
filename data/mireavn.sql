@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 31, 2021 at 10:48 PM
+-- Generation Time: Nov 04, 2021 at 11:43 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.10
 
@@ -47,7 +47,7 @@ CREATE TABLE `admins` (
 --
 
 INSERT INTO `admins` (`id`, `name`, `gender`, `phone`, `address`, `image`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'demo', 'MALE', 'demo', 'demo', 'demo', 'admin@mireavn.ru', NULL, '$2y$10$dvc8QKvciQdKYNnhy6aTrOQoTwVRBL7nIqfx6OIUIG/XljGVF33Wm', NULL, NULL, NULL);
+(1, 'admin@mireavn.ru', 'MALE', '', '', '', 'admin@mireavn.ru', NULL, '$2y$10$dvc8QKvciQdKYNnhy6aTrOQoTwVRBL7nIqfx6OIUIG/XljGVF33Wm', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -77,6 +77,35 @@ CREATE TABLE `failed_jobs` (
   `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `i_k_b_o_s`
+--
+
+CREATE TABLE `i_k_b_o_s` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `position` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `facebook` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `github` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `instagram` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `vk` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `i_k_b_o_s`
+--
+
+INSERT INTO `i_k_b_o_s` (`id`, `name`, `image`, `email`, `position`, `facebook`, `github`, `instagram`, `vk`, `created_at`, `updated_at`) VALUES
+(1, 'Lê Đình Cường', 'cuong.jpg', 'dinhcuong.firewin99@gmail.com', 'WEB DEVELOPER', 'ledhcg', 'ledhcg', 'ledhcg', 'kifirlee', NULL, NULL),
+(2, 'Vũ Xuân Cảnh', 'canh.jpg', 'xuancanhit99@gmail.com', 'WEB DEVELOPER', 'xuancanhit99', 'xuancanhit99', 'xuancanh.vu', 'xuancanhit99', NULL, NULL),
+(3, 'Phương Tiến Đông', 'dong.jpg', 'dongpt410@gmail.com', 'WEB DEVELOPER', 'tiendong.2000', 'phuongtiendong', 'phuongtien.dong', 'id602943301', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -115,9 +144,10 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (4, '2019_12_14_000001_create_personal_access_tokens_table', 1),
 (5, '2021_10_17_150759_create_admins_table', 1),
 (6, '2021_10_23_123447_create_notifications_table', 1),
-(7, '2021_10_29_155711_create_candidates_table', 2),
-(8, '2021_10_29_184839_create_settings_table', 3),
-(9, '2021_10_30_143217_create_list_votes_table', 4);
+(7, '2021_10_29_155711_create_candidates_table', 1),
+(8, '2021_10_29_184839_create_settings_table', 1),
+(9, '2021_10_30_143217_create_list_votes_table', 1),
+(10, '2021_11_04_170335_create_i_k_b_o_s_table', 1);
 
 -- --------------------------------------------------------
 
@@ -186,7 +216,7 @@ CREATE TABLE `settings` (
 --
 
 INSERT INTO `settings` (`id`, `qty_receive`, `qty_total`, `status`, `created_at`, `updated_at`) VALUES
-(1, 3, 5, 'INACTIVE', NULL, '2021-10-31 14:00:57');
+(1, 1, 1, 'INACTIVE', NULL, '2021-11-04 19:42:45');
 
 -- --------------------------------------------------------
 
@@ -212,16 +242,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `image`, `email`, `status`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, '1', 'avatar.png', '0@example.com', 'INACTIVE', NULL, '$2y$10$hCP5WbwpD9s.QgMlBc.5xunarh7jGzJO8qHoB9sC5842paQTrnDL6', NULL, '2021-10-31 18:46:39', '2021-10-31 18:46:39'),
-(2, '2', 'avatar.png', '1@example.com', 'INACTIVE', NULL, '$2y$10$CXGAL5ALsNU6EJ5WCub86uwtIhGxVzFbOz9ypSvtvxd1H9JCyJgdW', NULL, '2021-10-31 18:46:40', '2021-10-31 18:46:40'),
-(3, '3', 'avatar.png', '2@example.com', 'INACTIVE', NULL, '$2y$10$yigPjDeorflp4SEltDMRheBV9PX9FqO5OxYis9IpXbiXPdDhfNjEK', NULL, '2021-10-31 18:46:41', '2021-10-31 18:46:41'),
-(4, '4', 'avatar.png', '3@example.com', 'INACTIVE', NULL, '$2y$10$3mUQ4XJ4dLJz/NmrygWk5u2kYP.PEL6.96LIkOxi6ADBRfMoEmP.S', NULL, '2021-10-31 18:46:41', '2021-10-31 18:46:41'),
-(5, '5', 'avatar.png', '4@example.com', 'INACTIVE', NULL, '$2y$10$G0rvzEUOGEPuQZBJV6UrjexbML7W9LRVGtvNxkr8e1K0WeXOCzCOi', NULL, '2021-10-31 18:46:42', '2021-10-31 18:46:42'),
-(6, '6', 'avatar.png', '5@example.com', 'INACTIVE', NULL, '$2y$10$sQ5X/CpE5J.bPyp3pX4ZBOs2GAgY7QiTmWs2FepESea8qswPztoD.', NULL, '2021-10-31 18:46:43', '2021-10-31 18:46:43'),
-(7, '7', 'avatar.png', '6@example.com', 'INACTIVE', NULL, '$2y$10$5sjCnuKUTSfWgrPgQF3jb.MsYLDIydAqM1BUfaAoqqqX0yAH6j2V6', NULL, '2021-10-31 18:46:44', '2021-10-31 18:46:44'),
-(8, '8', 'avatar.png', '7@example.com', 'INACTIVE', NULL, '$2y$10$LwZoNARvREJfQUcvlSmqEuYaffOiOCaZLnu70DnB4flDGNEViNEnm', NULL, '2021-10-31 18:46:44', '2021-10-31 18:46:44'),
-(9, '9', 'avatar.png', '8@example.com', 'INACTIVE', NULL, '$2y$10$tB2CIL2.Xn7YUDmxPz3Az.4gSb8ZwIRc00sc1L5Qbhigm35SIRzAO', NULL, '2021-10-31 18:46:45', '2021-10-31 18:46:45'),
-(10, '10', 'avatar.png', '9@example.com', 'INACTIVE', NULL, '$2y$10$Gx4ivQBU/DsGal/y7vZgxeT54YcsHb5tUiK3qKKpDGiP7yTAKV0pm', NULL, '2021-10-31 18:46:46', '2021-10-31 18:46:46');
+(1, 'ABDNNMC', 'avatar.png', 'rific99@gmail.com', 'ACTIVE', NULL, '$2y$10$fRMjHmREmvRq6ZykHBo37.iu6nfAqjicCMI3pN5kPRpzm9O0x7wTi', NULL, '2021-11-04 18:02:36', '2021-11-04 19:42:20');
 
 --
 -- Indexes for dumped tables
@@ -246,6 +267,12 @@ ALTER TABLE `candidates`
 ALTER TABLE `failed_jobs`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
+
+--
+-- Indexes for table `i_k_b_o_s`
+--
+ALTER TABLE `i_k_b_o_s`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `list_votes`
@@ -316,6 +343,12 @@ ALTER TABLE `failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `i_k_b_o_s`
+--
+ALTER TABLE `i_k_b_o_s`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `list_votes`
 --
 ALTER TABLE `list_votes`
@@ -325,7 +358,7 @@ ALTER TABLE `list_votes`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -343,7 +376,7 @@ ALTER TABLE `settings`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
