@@ -142,11 +142,21 @@
                                 <div>
                                     <h6><span class="badge bg-light-success">ADD</span> TẠO TÀI KHOẢN CÁ NHÂN</h6>
                                     <p><i><small>Tạo tài khoản cá nhân bằng file (*.xls), (*.xlsx).</small></i></p>
-                                    <form action="{{route('admin.import-user-create')}}" method="post" enctype="multipart/form-data">
+                                    <form action="{{route('admin.import-user-create')}}" method="post" enctype="multipart/form-data" onsubmit="return confirm('Refesh & Create data?');">
                                         @csrf
                                         <input class="form-control" type="file" name="select_file">
+                                        <input class="form-control" type="hidden" name="select" value="refesh">
                                         <div class="col-sm-12 d-flex justify-content-center">
-                                            <button type="submit" class="btn btn-success rounded-pill mt-4">Create</button>
+                                            <button type="submit" class="btn btn-success rounded-pill mt-4">Refesh&Create</button>
+                                        </div>
+                                    </form>
+                                    <div class="p-2"></div>
+                                    <form action="{{route('admin.import-user-create')}}" method="post" enctype="multipart/form-data" onsubmit="return confirm('Add new data?');">
+                                        @csrf
+                                        <input class="form-control" type="file" name="select_file">
+                                        <input class="form-control" type="hidden" name="select" value="add">
+                                        <div class="col-sm-12 d-flex justify-content-center">
+                                            <button type="submit" class="btn btn-info rounded-pill mt-4">Add new</button>
                                         </div>
                                     </form>
                                 </div>
