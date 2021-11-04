@@ -44,7 +44,7 @@ class HomeController extends Controller
         $dataIKBOs = IKBO::all();
         $urlPhoto = asset("data/images/upload/ikbo/");
 
-        return view('main.coming-soon', [
+        return view('main.ikbo', [
             'dataIKBOs' => $dataIKBOs,
             'urlPhoto' => $urlPhoto,
         ]);

@@ -1,7 +1,7 @@
 @extends('layouts.main-layout')
 
 @section('title')
-    <title>MIREA VIỆT NAM | Bạn bè</title>
+    <title>MIREA VIỆT NAM | IKBO SOFTWARE</title>
 @endsection
 @section('content')
     <style>
