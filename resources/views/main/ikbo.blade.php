@@ -46,7 +46,7 @@
             <p></p>
             <div class="row pt-md-5 pb-lg-5 justify-content-center">
                 @foreach($dataIKBOs as $ikbo)
-                <div class="col-xl-4 col-lg-4 col-md-5 col-sm-12 d-flex align-items-center justify-content-center">
+                <div class="col-xl-4 col-lg-4 col-md-5 col-sm-12 d-flex align-items-center justify-content-center mb-4 mt-4">
                     <div class="text-center">
                         <img src="{{$urlPhoto}}/{{$ikbo->image}}" class="d-inline-block rounded-circle mb-3" width="96" alt="">
                         <h5 class="pt-1 mb-1">{{$ikbo->name}}</h5>
