@@ -13,6 +13,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Maatwebsite\Excel\Facades\Excel;
 class UserController extends Controller
 {
@@ -193,6 +194,18 @@ class UserController extends Controller
             return true;
         };
         return false;
+    }
+
+    //Function gui email dong gop y kien
+    public function contributeIdeas(Request $request){
+        $emailFrom = 'Guest';
+        if($request->input('email')){
+            $emailFrom = $request->input('email');
+        }
+        $ideas = $request->input('ideas');
+        $emailTo = 'mirealienbangnga@gmail.com';
+        Mail::to($emailTo)->send(new \App\Mail\ContributeIdeas($emailFrom, $ideas));
+        return response()->json(['code'=> 1, 'success'=> 'Gửi đóng góp thành công!']);
     }
 
 }

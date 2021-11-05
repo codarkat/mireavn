@@ -19,11 +19,11 @@
                     @csrf
                     @if($dataSettings->status == \App\Enums\StatusEnum::INACTIVE)
                         <div class="alert alert-danger text-center">PHIẾU ĐANG BỊ ĐÓNG. VUI LÒNG QUAY LẠI SAU!</div>
-                        <image class="center-image-success" src="https://media.giphy.com/media/3o6fJeVJSTSXqzwaSk/giphy.gif"></image>
+                        <image class="center-image-success" src="https://media.giphy.com/media/J3QsoqP6L4SsKkRQbx/giphy.gif"></image>
                     @else
                         @if($checkVote)
                             <div class="alert alert-success text-center">Cảm ơn. Bạn đã bỏ phiếu thành công.</div>
-                            <image class="center-image-success" src="https://media.giphy.com/media/eh7Uqh7n6HRjHQLs3y/giphy.gif"></image>
+                            <image class="center-image-success" src="https://media.giphy.com/media/3oriNO0p3Sn0itamg8/giphy.gif"></image>
                         @else
                             <div class="alert alert-info" id="textTutorial">
                                 <!--Content for textTutorial-->

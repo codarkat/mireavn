@@ -226,6 +226,12 @@ Route::prefix('user')->name('user.')->group(function () {
             'uses' => 'User\UserController@changePassword'
         ]);
 
+        Route::post('/contribute-ideas', [
+            'as' => 'contribute-ideas',
+            'uses' => 'User\UserController@contributeIdeas'
+        ]);
+
+
     });
 });
 

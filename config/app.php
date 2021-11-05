@@ -15,9 +15,12 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
+
     'email_address' => env('EMAIL_ADDRESS', 'mail@htphodatviet.com'),
     'phone_number' => env('PHONE_NUMBER', '+7 (900) 555 67 89'),
     'address' => env('ADDRESS', 'null'),
+
+    'club_name' => env('CLUB_NAME', 'IKBO SOFTWARE'),
 
     /*
     |--------------------------------------------------------------------------

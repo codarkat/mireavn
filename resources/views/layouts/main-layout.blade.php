@@ -9,7 +9,7 @@
 
     @include('partials-main.navbar')
     @yield('content')
-
+    @include('partials-main.modal')
 </main>
 
     @include('partials-main.footer')

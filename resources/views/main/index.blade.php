@@ -12,7 +12,7 @@
                     <span class="d-inline-block h5 text-light fw-light mx-2 opacity-70">BAN CHẤP HÀNH CHI ĐOÀN MIREA</span>
                     <h1 class="text-light pb-sm-3"><span class='fw-light'><strong>PHIẾU BẦU CỬ ONLINE </strong></span></h1>
                     <hr class="mb-2">
-                    <span class="d-inline-block small text-light fw-light mx-2 opacity-60">Powered by <strong><a class="text-white" href="{{route('main.club-ikbo')}}">IKBO SOFTWARE</a></strong></span>
+                    <span class="d-inline-block small text-light fw-light mx-2 opacity-60">Powered by <strong><a class="text-white" href="{{route('main.club-ikbo')}}">{{config('app.club_name')}}</a></strong></span>
                     <div class="py-4 py-sm-5"><a class="btn btn-primary btn-lg" href="{{route('user.page-vote')}}">Bầu cử ngay<i class="ci-check ms-2"></i></a></div>
                 </div>
             </div>

@@ -39,4 +39,57 @@
             window.location.reload(true);
         }
     });
+
+    $('#contribute-ideas').on('submit', function(e){
+        e.preventDefault();
+        if(!$('#email-send').val()){
+            Toastify({
+                text: "{{__('Bạn cần đăng nhập để thực hiện chức năng này!')}}",
+                duration: 3000,
+                close: true,
+                gravity: "bottom",
+                position: "center",
+                backgroundColor: "#F55260",
+                stopOnFocus: true,
+            }).showToast();
+            return false;
+        }
+
+        if( !$('#ideas').val() ) {
+            Toastify({
+                text: "{{__('Lời nhắn đang trống!')}}",
+                duration: 3000,
+                close: true,
+                gravity: "bottom",
+                position: "center",
+                backgroundColor: "#F55260",
+                stopOnFocus: true,
+            }).showToast();
+            return false;
+        }
+
+        var form = this;
+
+        $.ajax({
+            url: $(form).attr('action'),
+            method: $(form).attr('method'),
+            dataType: 'json',
+            contentType: false,
+            processData: false,
+            data: new FormData(this),
+            success: function(data){
+                if(data.code == 1){
+                    Toastify({
+                        text: data.success,
+                        duration: 3000,
+                        close: true,
+                        gravity: "bottom",
+                        position: "center",
+                        backgroundColor: "#39DA8A",
+                        stopOnFocus: true,
+                    }).showToast();
+                }
+            }
+        });
+    });
 </script>

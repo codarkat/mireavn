@@ -20,6 +20,7 @@
     <!-- Main Theme Styles + Bootstrap-->
     <link rel="stylesheet" href="{{asset('public/main/assets/css/style.css')}}">
     <link rel="stylesheet" media="screen" href="{{asset('public/main/css/theme.min.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <style>
         .pointer {
@@ -33,5 +34,4 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
 </head>
