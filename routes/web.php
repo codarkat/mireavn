@@ -1,9 +1,12 @@
 <?php
 
+use App\Http\Controllers\Auth\ForgotPasswordController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\LocalizationController;
 use App\Http\Controllers\PaymentController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,9 +19,9 @@ use App\Http\Controllers\PaymentController;
 */
 
 
-Route::prefix('admin')->group(function (){
+Route::prefix('admin')->group(function () {
 
-    Route::middleware(['admin:admin', 'PreventBrowserBackHistory'])->group(function (){
+    Route::middleware(['admin:admin', 'PreventBrowserBackHistory'])->group(function () {
         Route::get('', [
             'as' => 'admin.dashboard',
             'uses' => 'AdminController@dashboard'
@@ -108,7 +111,7 @@ Route::prefix('admin')->group(function (){
 
     });
 
-    Route::middleware(['guest:admin', 'PreventBrowserBackHistory'])->group(function (){
+    Route::middleware(['guest:admin', 'PreventBrowserBackHistory'])->group(function () {
 
 
         Route::get('/login', [
@@ -126,8 +129,7 @@ Route::prefix('admin')->group(function (){
 });
 
 
-
-Route::name('main.')->group(function (){
+Route::name('main.')->group(function () {
     Route::get('/', function () {
         return view('main.index');
     });
@@ -161,8 +163,8 @@ Route::name('main.')->group(function (){
 
 Auth::routes();
 
-Route::prefix('user')->name('user.')->group(function (){
-    Route::middleware(['guest:web', 'PreventBrowserBackHistory'])->group(function (){
+Route::prefix('user')->name('user.')->group(function () {
+    Route::middleware(['guest:web', 'PreventBrowserBackHistory'])->group(function () {
 
         //UI
 
@@ -183,7 +185,7 @@ Route::prefix('user')->name('user.')->group(function (){
 
     });
 
-    Route::middleware(['auth:web', 'PreventBrowserBackHistory'])->group(function (){
+    Route::middleware(['auth:web', 'PreventBrowserBackHistory'])->group(function () {
         //UI
         Route::get('/page-vote', [
             'as' => 'page-vote',
@@ -226,4 +228,11 @@ Route::prefix('user')->name('user.')->group(function (){
 
     });
 });
+
+
+Route::get('forget-password', [ForgotPasswordController::class, 'showForgetPasswordForm'])->name('forget.password.get');
+Route::post('forget-password', [ForgotPasswordController::class, 'submitForgetPasswordForm'])->name('forget.password.post');
+Route::get('reset-password/{token}', [ForgotPasswordController::class, 'showResetPasswordForm'])->name('reset.password.get');
+Route::post('reset-password', [ForgotPasswordController::class, 'submitResetPasswordForm'])->name('reset.password.post');
+
 
