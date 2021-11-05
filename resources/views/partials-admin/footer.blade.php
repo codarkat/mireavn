@@ -5,7 +5,7 @@
                 <p>&copy; 2021 - MIREA VIETNAM</p>
             </div>
             <div class="float-end">
-                <p>Powered by <a href="{{route('main.club-ikbo')}}">IKBO SOFTWARE</a></p>
+                <p>Powered by <a href="{{route('main.club-ikbo')}}">{{config('app.club_name')}}</a></p>
             </div>
         </div>
     </div>

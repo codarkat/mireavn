@@ -1,7 +1,7 @@
 @extends('layouts.main-layout')
 
 @section('title')
-    <title>MIREA VIỆT NAM | IKBO SOFTWARE</title>
+    <title>MIREA VIỆT NAM | {{config('app.club_name')}}</title>
 @endsection
 @section('content')
     <style>
@@ -75,7 +75,7 @@
     <script>
         document.addEventListener('DOMContentLoaded',function(event){
             // array with texts to type in typewriter
-            var dataText = [ "WE", "ARE", "IKBO SOFTWARE!"];
+            var dataText = [ "WE", "ARE", "{{config('app.club_name')}}"];
 
             // type one text in the typwriter
             // keeps calling itself until the text is finished

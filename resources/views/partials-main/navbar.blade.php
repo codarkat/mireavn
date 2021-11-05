@@ -40,7 +40,7 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle pointer" data-bs-toggle="dropdown" data-bs-auto-close="outside">CLUB</a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{{route('main.club-ikbo')}}">IKBO SOFTWARE</a></li>
+                            <li><a class="dropdown-item" href="{{route('main.club-ikbo')}}">{{config('app.club_name')}}</a></li>
 {{--                            <li><a class="dropdown-item" href="{{route('main.club-mirea-fc')}}">MIREA FC</a></li>--}}
                         </ul>
                     </li>
