@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 04, 2021 at 11:43 PM
+-- Generation Time: Nov 05, 2021 at 04:15 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.10
 
@@ -47,7 +47,7 @@ CREATE TABLE `admins` (
 --
 
 INSERT INTO `admins` (`id`, `name`, `gender`, `phone`, `address`, `image`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'admin@mireavn.ru', 'MALE', '', '', '', 'admin@mireavn.ru', NULL, '$2y$10$dvc8QKvciQdKYNnhy6aTrOQoTwVRBL7nIqfx6OIUIG/XljGVF33Wm', NULL, NULL, NULL);
+(1, 'admin@mireavn.ru', 'MALE', '', '', '', 'admin@mireavn.ru', NULL, '$2y$10$fM6LEDvXf4LkoFOjkPEdiOo1aHzCU7p3zrrmHSuyvEsN3DS2zoet6', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -178,6 +178,13 @@ CREATE TABLE `password_resets` (
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `password_resets`
+--
+
+INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES
+('rific99@gmail.com', 'WaHnjsvKIhgBi6Zz5gSqjUczG4rzpvEJN2GsjfM6CXzSM7Yghccr3hK2uICG5Nn1', '2021-11-04 23:56:03');
+
 -- --------------------------------------------------------
 
 --
@@ -242,7 +249,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `image`, `email`, `status`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'ABDNNMC', 'avatar.png', 'rific99@gmail.com', 'ACTIVE', NULL, '$2y$10$fRMjHmREmvRq6ZykHBo37.iu6nfAqjicCMI3pN5kPRpzm9O0x7wTi', NULL, '2021-11-04 18:02:36', '2021-11-04 19:42:20');
+(1, 'Lê Đình Cường', 'avatar.png', 'dinhcuong1.firewin99@gmail.com', 'INACTIVE', NULL, '$2y$10$fM6LEDvXf4LkoFOjkPEdiOo1aHzCU7p3zrrmHSuyvEsN3DS2zoet6', NULL, '2021-11-05 00:12:52', '2021-11-05 00:12:52'),
+(2, 'Vũ Xuân Cảnh', 'avatar.png', 'xuancanhit99@gmail.com', 'INACTIVE', NULL, '$2y$10$TUQaq7ZzI/W48HnlKhV1IeTIm/nw44zT0dOYrGaGQH7GLyXqTA92S', NULL, '2021-11-05 00:12:53', '2021-11-05 00:12:53'),
+(3, 'Phương Tiến Đông', 'avatar.png', 'dongpt4101@gmail.com', 'INACTIVE', NULL, '$2y$10$thWSAQ8hl5cdBtB9ogUynugI98UD034QpJGUpzEAfyyOMOM7HMhA2', NULL, '2021-11-05 00:12:54', '2021-11-05 00:12:54');
 
 --
 -- Indexes for dumped tables
@@ -376,7 +385,7 @@ ALTER TABLE `settings`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
