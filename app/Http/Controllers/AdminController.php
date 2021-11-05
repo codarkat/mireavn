@@ -64,6 +64,7 @@ class AdminController extends Controller
     public function results(){
         $arrayDataCandidates = [];
         $arrayDataVotesPercent = [];
+        $arrayDataVotes = [];
 
         $total_users_online = User::where('status', StatusEnum::ACTIVE)->get()->count();
         $total_users_vote = ListVote::all()->count();
@@ -83,12 +84,14 @@ class AdminController extends Controller
                 $result_row = json_decode($vote->result);
                 $total_result += (int)$result_row[$i];
             }
+            array_push($arrayDataVotes, $total_result);
             array_push($arrayDataVotesPercent, round($total_result/$total_users_online*100, 2));
         }
 
         return view('admin.results', [
             'arrayDataCandidates'=> $arrayDataCandidates,
             'arrayDataVotesPercent' => $arrayDataVotesPercent,
+            'arrayDataVotes' => $arrayDataVotes,
             'total_users_online' => $total_users_online,
             'total_users_vote' => $total_users_vote,
             'dataCandidates' => $dataCandidates,

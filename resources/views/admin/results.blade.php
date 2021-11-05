@@ -29,6 +29,11 @@
                             </thead>
                             <tbody>
                             <tr>
+                                @foreach($arrayDataVotes as $data)
+                                    <td>{{$data}}/{{$total_users_online}}</td>
+                                @endforeach
+                            </tr>
+                            <tr>
                                 @foreach($arrayDataVotesPercent as $data)
                                     <td>{{$data}}%</td>
                                 @endforeach
