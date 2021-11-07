@@ -173,7 +173,8 @@ class UserController extends Controller
                 $vote->user_id = $id;
                 $vote->result = $dataArray;
                 $vote->save();
-                event(new UpdateChange('INACTIVE', $id, 1));
+                //Fix lỗi reload lại web sau khi bầu cử
+                //event(new UpdateChange('INACTIVE', $id, 1));
                 return response()->json(['code'=> 1, 'success'=> 'Bầu cử thành công!']);
             }
 

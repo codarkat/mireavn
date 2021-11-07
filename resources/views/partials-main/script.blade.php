@@ -26,7 +26,7 @@
     var channel = pusher.subscribe('mireavn');
     channel.bind('App\\Events\\UpdateChange', function(data) {
         if(data.active == 0){
-            console.log(data.active);
+            // console.log(data.active);
             var status = '';
             if(data.status == '{{\App\Enums\StatusEnum::ACTIVE}}'){
                 status += `<span class="badge bg-success"><i class="ci-check me-2"></i>Online</span>`;
@@ -35,8 +35,9 @@
             }
             $('#user-status-'+data.user_id).html(status);
         } else {
-            console.log(data.active);
-            window.location.reload(true);
+            // Fix reload trang sau bầu cử
+            // console.log(data.active);
+            // window.location.reload(true);
         }
     });
 

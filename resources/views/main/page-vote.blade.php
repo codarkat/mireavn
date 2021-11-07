@@ -121,6 +121,8 @@
                                 backgroundColor: "#39DA8A",
                                 stopOnFocus: true,
                             }).showToast();
+                            //Reload trang sau bầu cử thành công
+                            window.location.reload(true)
                         }
                     }
                 });
