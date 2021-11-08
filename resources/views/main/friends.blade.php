@@ -19,13 +19,11 @@
                                     <img class="rounded-circle" src="{{$urlPhoto}}/{{$friend->image}}" alt="Avatar"></div>
                                 <div class="ps-3">
                                     <h3 class="text-light fs-lg mb-0">{{$friend->name}}</h3>
-                                    <span class="d-block text-light fs-ms opacity-60 py-1">{{$friend->email}}</span>
                                     <div id="user-status-{{$friend->id}}">
                                     @if($friend->status == \App\Enums\StatusEnum::ACTIVE)
-
-                                        <span class="badge bg-success"><i class="ci-check me-2"></i>Online</span>
+                                        <span class="badge bg-success"><i class="ci-check me-2"></i>Tham dự</span>
                                     @else
-                                        <span class="badge bg-danger"><i class="ci-delete-location me-2"></i>Offline</span>
+                                        <span class="badge bg-danger"><i class="ci-delete-location me-2"></i>Vắng</span>
                                     @endif
                                     </div>
                                 </div>

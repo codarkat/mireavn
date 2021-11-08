@@ -154,13 +154,13 @@
                     {
                         data: 'status',
                         name: 'status',
-                        orderable: false,
+                        orderable: true,
                         searchable: false
                     },
                     {
                         data: 'action',
                         name: 'action',
-                        orderable: false,
+                        orderable: true,
                         searchable: false
                     },
                 ]

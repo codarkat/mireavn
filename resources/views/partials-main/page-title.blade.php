@@ -9,9 +9,9 @@
                 <div id="user-status-{{$dataUser->id}}">
                     @if($dataUser->status == \App\Enums\StatusEnum::ACTIVE)
 
-                        <span class="badge bg-success"><i class="ci-check me-2"></i>Online</span>
+                        <span class="badge bg-success"><i class="ci-check me-2"></i>Tham dự</span>
                     @else
-                        <span class="badge bg-danger"><i class="ci-delete-location me-2"></i>Offline</span>
+                        <span class="badge bg-danger"><i class="ci-delete-location me-2"></i>Vắng</span>
                     @endif
                 </div>
             </div>

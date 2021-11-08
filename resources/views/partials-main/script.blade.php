@@ -29,9 +29,9 @@
             // console.log(data.active);
             var status = '';
             if(data.status == '{{\App\Enums\StatusEnum::ACTIVE}}'){
-                status += `<span class="badge bg-success"><i class="ci-check me-2"></i>Online</span>`;
+                status += `<span class="badge bg-success"><i class="ci-check me-2"></i>Tham dự</span>`;
             } else {
-                status += `<span class="badge bg-danger"><i class="ci-delete-location me-2"></i>Offline</span>`;
+                status += `<span class="badge bg-danger"><i class="ci-delete-location me-2"></i>Vắng</span>`;
             }
             $('#user-status-'+data.user_id).html(status);
         } else {
