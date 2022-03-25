@@ -35,7 +35,7 @@
             }
             $('#user-status-'+data.user_id).html(status);
         } else {
-            // Fix reload trang sau bầu cử
+            // Fix bug - Auto reload after 1 user created vote
             // console.log(data.active);
             // window.location.reload(true);
         }

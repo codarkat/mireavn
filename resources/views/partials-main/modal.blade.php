@@ -19,10 +19,9 @@
                         </div>
                         <style>
                             .preview_image {
-                                width:100%;
-                                height:100%;
-                                object-fit: cover;
                                 overflow: hidden;
+                                width: 160px;
+                                height: 160px;
                             }
                         </style>
 
