@@ -1,3 +1,4 @@
-[submodule "MireaEdu"]
-	path = MireaEdu
+
+[submodule "edu"]
+	path = edu
 	url = https://github.com/ledhcg/MireaEdu.git
