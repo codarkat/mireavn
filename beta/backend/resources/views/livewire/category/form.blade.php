@@ -19,7 +19,7 @@
                             <!--end::Label-->
                             <input type="text" class="form-control form-control-solid"
                                    placeholder="Category Name" name="category-name"
-                                   wire:model="name" />
+                                   wire:model.lazy="name" />
                             @error('name')
                             <div class="fv-plugins-message-container invalid-feedback">
                                 <div>{{ $message }}</div>
@@ -32,7 +32,7 @@
                             <label class="fs-6 fw-semibold mb-2">Description</label>
                             <textarea class="form-control form-control-solid" rows="3"
                                       name="category-description" placeholder="Description"
-                                      wire:model="description"></textarea>
+                                      wire:model.lazy="description"></textarea>
                             @error('description')
                             <div class="fv-plugins-message-container invalid-feedback">
                                 <div>{{ $message }}</div>

@@ -1,29 +1,35 @@
 <?php
 
-namespace App\Http\Livewire;
-use App\Models\Category;
-use Livewire\Component;
+namespace App\Http\Livewire\Category;
 
-class CategoryForm extends Component
+use Livewire\Component;
+use App\Models\Category;
+use Illuminate\Validation\Rule;
+
+class Form extends Component
 {
     public $name, $description, $category_id;
     public $titleModal = 'Add Category';
     protected $listeners = [
         'getCategoryData',
-        'deleteCategory'
+        'deleteCategory',
+        'setAddForm'
     ];
     
     public function save()
     {
-        
         $this->validate([
-            'name' => 'required|unique:categories',
+            'name' => [
+                'required',
+                Rule::unique('categories')->ignore($this->category_id),
+            ],
             'description' => 'required',
         ], [
             'name.unique' => 'The name has already been taken',
             'name.required' => 'The name is required',
             'description.required' => 'The description is required',
         ]);
+        
 
         $data = [
             'name' => $this->name,
@@ -32,12 +38,14 @@ class CategoryForm extends Component
 
         if($this->category_id) {
             $category = Category::find($this->category_id)->update($data);
+            $this->dispatchBrowserEvent('closeModal');
         } else {
             $category = Category::create($data);
+            $this->dispatchBrowserEvent('closeModal');
         }
 
-        $this->emitUp('refreshParent');
-        $this->dispatchBrowserEvent('closeModal');
+        
+        $this->dispatchBrowserEvent('refreshTable');
         $this->cleanVars();
 
         // $category->name = $this->name;
@@ -52,24 +60,31 @@ class CategoryForm extends Component
 
     }
 
+    public function setAddForm(){
+        $this->titleModal = 'Add Category';
+        $this->name = null;
+        $this->description = null;
+        $this->category_id = null;
+    }
+
     public function cleanVars(){
         $this->name = null;
         $this->description = null;
         $this->category_id = null;
-        $this->titleModal = 'Add Category';
     }
 
     public function deleteCategory($category_id){
         Category::destroy($category_id);
+        $this->dispatchBrowserEvent('refreshTable');
     }
 
 
     public function getCategoryData($category_id){
         $this->titleModal = 'Update Category';
-        $this->category_id = $category_id;
         $category_data = Category::find($category_id);
         $this->name = $category_data->name;
         $this->description = $category_data->description;
+        $this->category_id = $category_id;
     }
 
     public function showToast($type, $message){
@@ -81,6 +96,6 @@ class CategoryForm extends Component
 
     public function render()
     {
-        return view('livewire.category-form');
+        return view('livewire.category.form');
     }
 }
