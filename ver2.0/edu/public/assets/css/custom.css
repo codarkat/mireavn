@@ -1,0 +1,31 @@
+/* Your Custom CSS Goes here */
+
+.bg-correct {
+    background-color: #E6FCF0 !important;
+}
+
+.bd-correct {
+    border-color: #E6FCF0 !important;
+}
+
+.bg-incorrect {
+    background-color: #FCE3E5 !important;
+}
+
+.bd-incorrect {
+    border-color: #FCE3E5 !important;
+}
+
+.bg-countdown-red {
+    background-color: #FCE3E5 !important;
+}
+
+.app-sidebar .clock {
+    position: fixed;
+    background-color: #f5f7fa;
+    width: 200px;
+    margin: 40px;
+    bottom: 0px;
+    padding: 10px;
+    border-radius: 10px;
+}

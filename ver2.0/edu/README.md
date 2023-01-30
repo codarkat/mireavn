@@ -1,0 +1,4 @@
+- Clone
+- Run: npm install
+- Copy file .evn.example thành file .env
+- Database: - (user và admin) từ file mireavn.sql | data từ file mireaedu.sql trong folder database
