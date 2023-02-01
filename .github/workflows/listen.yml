@@ -1,0 +1,31 @@
+name: Update All Submodules if Changed
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  update-all-submodules:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Update all submodules if changed
+      run: |
+        git submodule update --remote --recursive
+        changed=$(git diff HEAD --name-only)
+        if [ -n "$changed" ]; then
+          git add .
+          git commit -m "Updating all submodules"
+          git push
+        else
+          echo "No changes detected in any submodules"
+        fi
+
+    - name: Push changes
+      uses: ad-m/github-push-action@main
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
